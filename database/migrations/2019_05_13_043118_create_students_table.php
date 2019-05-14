@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->integer('grade');
-            $table->decimal('reading_level', 1,1);
+            $table->decimal('reading_level', 2,1);
             $table->integer('fluency_level');
             $table->string('category');
             $table->string('team');

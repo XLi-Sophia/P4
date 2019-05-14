@@ -107,7 +107,7 @@ class FormController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'author_id' => 'required',
+            'student_id' => 'required',
             'grade' => 'required|digits:1',
             'reading_level' => 'required|decimal:2,1',
             'fluency_level' => 'required|digits:3',
