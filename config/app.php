@@ -3,7 +3,8 @@
 return [
 
 
-    'githubUrl' => 'https://git@github.com:XLi-Sophia/P4',
+    'githubUrl' => 'https://github.com/XLi-Sophia/p4',
+    'developer' => 'Sophia Li',
 
     'nav' => [
         '' => 'Home',

@@ -48,7 +48,7 @@
 </section>
 
 <footer>
-    <a href='{{ config('app.githubUrl') }}'><i class='fab fa-github'></i> View on Github</a>
+    <a href='{{ config('app.githubUrl') }}'><i class='fab fa-github'></i> View on Github</a> <b>- Design by Sophia Li.</b>
 </footer>
 
 </body>
