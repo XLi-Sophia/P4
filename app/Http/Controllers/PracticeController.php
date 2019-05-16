@@ -164,8 +164,12 @@ class PracticeController extends Controller
      */
     public function practice10()
     {
-        $books = Book::where('published_year', '>', 1950)->get();
-        Book::dump($books);
+        $students = Student::where('last_name', '=', 'Affleck')->first();
+        dump($students->last_name);
+        dump($students);
+        dump($students->toArray());
+        dump($students->credits);
+        echo $students;
         # Underlying SQL: select * from `books` where `published` > '1950'
     }
 

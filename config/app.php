@@ -4,7 +4,10 @@ return [
 
 
     'githubUrl' => 'https://github.com/XLi-Sophia/p4',
-    'developer' => 'Sophia Li',
+
+    /* future improvement
+     'developer' => 'developer's website here',
+    */
 
     'nav' => [
         '' => 'Home',
