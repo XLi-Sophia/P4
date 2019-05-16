@@ -1,28 +1,26 @@
 @extends('layouts.master')
 
 @section('head')
-    <link href='/css/books/delete.css' rel='stylesheet'>
+    <link href='/css/students/delete.css' rel='stylesheet'>
 @endsection
 
 @section('title')
-    Confirm deletion: {{ $book->title }}
+    Confirm deletion: {{ $student->last_name }}, {{ $student->first_name }}
 @endsection
 
 @section('content')
     <h1>Confirm deletion</h1>
 
-    <p>Are you sure you want to delete <strong>{{ $book->title }}</strong>?</p>
+    <p>Are you sure you want to delete <strong>{{ $student->last_name }}, {{ $student->first_name }}</strong>?</p>
 
-    <img src='{{ $book->cover_url }}' class='cover' alt='Cover image for {{ $book->title }}'>
-
-    <form method='POST' action='/books/{{ $book->id }}'>
+    <form method='POST' action='/students/{{ $student->id }}'>
         {{ method_field('delete') }}
         {{ csrf_field() }}
         <input type='submit' value='Yes, delete it!' class='btn btn-danger btn-small'>
     </form>
 
     <p class='cancel'>
-        <a href='/books/{{ $book->id }}'>No, I changed my mind.</a>
+        <a href='/students/search'>No, I changed my mind. GO back to Search page.</a>
     </p>
 
 @endsection

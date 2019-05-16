@@ -6,12 +6,10 @@ return [
     'githubUrl' => 'https://git@github.com:XLi-Sophia/P4',
 
     'nav' => [
-        'students' => 'Students',
+        '' => 'Home',
         'students/search' => 'Search',
-        'students/create' => 'Add/delete student',
-        'about' => 'About',
+        'students/create' => 'Add student',
         'contact' => 'Contact',
-        'practice' => 'practice',
     ],
 
     /*
@@ -25,7 +23,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Project4'),
+    'name' => env('APP_NAME', 'Project 4'),
 
     /*
     |--------------------------------------------------------------------------

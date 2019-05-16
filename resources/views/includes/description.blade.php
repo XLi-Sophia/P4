@@ -1,1 +1,0 @@
-Project 4 is a simple student progress tracking system created as a proof of concept for <a href='https://xli-dwa15.me'>CSCI E-15 Dynamic Web Applications - Project 4</a>.

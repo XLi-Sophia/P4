@@ -7,8 +7,15 @@ Route::view('/', 'welcome');
 Route::view('/about', 'about');
 Route::view('/contact', 'contact');
 
+Route::view('/students', 'book');
+
 /*
- * Books
+ * welcome page
+ */
+Route::get('/', 'FormController@welcome');
+
+/*
+ * Students
  */
 Route::get('/students/create', 'FormController@create');
 Route::post('/students', 'FormController@store');

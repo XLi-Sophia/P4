@@ -4,17 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Student;
+
 class FormController extends Controller
 {
+    // GET all students (welcome.blade.php)
+    public function welcome()
+    {
+        # Get all the students from our database
+        $students = Student::orderBy('last_name')->get();
+
+        return view('welcome')->with([
+            'students' => $students,
+        ]);
+    }
+
     /*
      * GET /books
      */
     public function index()
     {
-        # Get all the books from our library
-        $students = P4::with('grade')->orderBy('last_name')->get();
+        # Get all the students from our database
+        $students = Student::orderBy('last_name')->get();
 
-        # Query on the existing collection to get our recently added books
+        # Query on the existing collection to get recently added students
         $newStudents = $students->sortByDesc('created_at')->take(3);
 
         return view('students.index')->with([
@@ -28,14 +41,14 @@ class FormController extends Controller
      */
     public function show($id)
     {
-        $book = P4::with('author')->find($id);
+        $student = Student::find($id);
 
-        if (!$book) {
-            return redirect('/books')->with(['alert' => 'Book not found']);
+        if (!$student) {
+            return redirect('/students')->with(['alert' => 'Student not found']);
         }
 
-        return view('books.show')->with([
-            'book' => $book
+        return view('students.show')->with([
+            'student' => $student
         ]);
     }
 
@@ -71,9 +84,9 @@ class FormController extends Controller
 
         if ($caseSensitive) {
             # Ref: https://stackoverflow.com/questions/25494849/case-sensitive-where-statement-in-laravel
-            $searchResults = P4::whereRaw("BINARY `grade`= ?", [$searchTerm])->get();
+            $searchResults = Student::whereRaw("BINARY `last_name`= ?", [$searchTerm])->get();
         } else {
-            $searchResults = P4::where('grade', $searchTerm)->get();
+            $searchResults = Student::where('last_name', $searchTerm)->get();
         }
 
         return redirect('/students/search')->with([
@@ -84,11 +97,13 @@ class FormController extends Controller
     }
 
     /*
-     * GET /books/create
+     * GET /students/create
      */
     public function create()
     {
-        $grade = Grade::getForDropdown();
+        return view('students.create');
+    /*
+        $grade = Student::getForDropdown();
 
         $category = Category::getForCheckboxes();
 
@@ -96,6 +111,7 @@ class FormController extends Controller
             'grade' => $grade,
             'category' => $category
         ]);
+    */
     }
 
     /*
@@ -107,29 +123,33 @@ class FormController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'student_id' => 'required',
             'grade' => 'required|digits:1',
-            'reading_level' => 'required|decimal:2,1',
+            'reading_level' => 'required',
             'fluency_level' => 'required|digits:3',
             'category' => 'required',
             'team' => 'required',
         ]);
 
-        # Note: If validation fails, it will redirect the visitor back to the form page
-        # and none of the code that follows will execute.
+        # Note: If validation fails, it will redirect the visitor back to
+        # the form page and none of the code that follows will execute.
 
-        $book = new Book();
-        $book->title = $request->title;
-        $book->author_id = $request->author_id;
-        $book->published_year = $request->published_year;
-        $book->cover_url = $request->cover_url;
-        $book->purchase_url = $request->purchase_url;
-        $book->save();
+        $student = new Student();
+        $student->first_name = $request->first_name;
+        $student->last_name = $request->last_name;
+        $student->grade = $request->grade;
+        $student->reading_level = $request->reading_level;
+        $student->fluency_level = $request->fluency_level;
+        $student->category = $request->category;
+        $student->team = $request->team;
+
+        $student->save();
 
         # Note: Have to sync tags *after* the book has been saved so there's a book_id to store in the pivot table
-        $book->tags()->sync($request->tags);
 
-        return redirect('/students/create')->with(['alert' => 'The book ' . $book->title . ' was added.']);
+        /*
+        $student->tags()->sync($request->tags);
+        */
+        return redirect('/students/create')->with(['alert' => 'A new student ' . $student->last_name . ', ' . $student->first_name . ' was added.']);
     }
 
     /*
@@ -137,24 +157,27 @@ class FormController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::find($id);
+        $student = Student::find($id);
 
+        /*
         $authors = Author::getForDropdown();
 
         $tags = Tag::getForCheckboxes();
 
         $bookTags = $book->tags->pluck('id')->toArray();
-
-        if (!$book) {
-            return redirect('/books')->with(['alert' => 'Book not found.']);
+    */
+        if (!$student) {
+            return redirect('/students')->with(['alert' => 'Book not found.']);
         }
-
+        return view('students.edit')->with(['student' => $student]);
+        /*
         return view('books.edit')->with([
             'book' => $book,
             'authors' => $authors,
             'tags' => $tags,
             'bookTags' => $bookTags,
         ]);
+        */
     }
 
     /*
@@ -162,17 +185,20 @@ class FormController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $book = Book::find($id);
-        $book->title = $request->title;
-        $book->author_id = $request->author_id;
-        $book->published_year = $request->published_year;
-        $book->cover_url = $request->cover_url;
-        $book->purchase_url = $request->purchase_url;
-        $book->tags()->sync($request->tags);
+        $student = Student::find($id);
+        $student->first_name = $request->first_name;
+        $student->last_name = $request->last_name;
+        $student->grade = $request->grade;
+        $student->reading_level = $request->reading_level;
+        $student->fluency_level = $request->fluency_level;
+        $student->category = $request->category;
+        $student->team = $request->team;
 
-        $book->save();
+        /**$student->tags()->sync($request->tags);**/
 
-        return redirect('/books/' . $id . '/edit')->with(['alert' => 'Your changes were saved.']);
+        $student->save();
+
+        return redirect('/students/' . $id . '/edit')->with(['alert' => 'Your changes were saved.']);
     }
 
     /*
@@ -181,14 +207,14 @@ class FormController extends Controller
     */
     public function delete($id)
     {
-        $book = Book::find($id);
+        $student = Student::find($id);
 
-        if (!$book) {
-            return redirect('/books')->with(['alert' => 'Book not found']);
+        if (!$student) {
+            return redirect('/students')->with(['alert' => 'Book not found']);
         }
 
-        return view('books.delete')->with([
-            'book' => $book,
+        return view('students.delete')->with([
+            'student' => $student,
         ]);
     }
 
@@ -198,14 +224,14 @@ class FormController extends Controller
     */
     public function destroy($id)
     {
-        $book = Book::find($id);
+        $student = Student::find($id);
 
-        $book->tags()->detach();
+        /*$student->tags()->detach();*/
 
-        $book->delete();
+        $student->delete();
 
-        return redirect('/books')->with([
-            'alert' => '“' . $book->title . '” was removed.'
+        return redirect('/')->with([
+            'alert' => '“' . $student->last_name . ', ' . $student->first_name . '” was removed.'
         ]);
     }
 

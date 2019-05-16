@@ -1,8 +1,7 @@
 <div class='book cf'>
-    <img class='cover' src='{{ $book->cover_url }}' alt='Cover image for the book {{ $book->title }}'>
-    <a href='/books/{{ $book->id }}'><h3>{{ $book->title }}</h3></a>
+    <a href='/students/{{ $student->id }}'><h3>{{ $student->last_name }}, {{ $student->first_name }} </h3></a>
     <ul>
-        <li>by {{ $book->author->getFullName() }}</li>
-        <li>Added {{ $book->created_at->format('m/d/y g:ia') }}</li>
+        <li>Grade: {{ $student->grade }}</li>
+        <li>Added {{ $student->created_at->format('m/d/y g:ia') }}</li>
     </ul>
 </div>

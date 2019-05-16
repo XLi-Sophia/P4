@@ -1,15 +1,5 @@
 /* box sizing: http://www.paulirish.com/2012/box-sizing-border-box-ftw */
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    outline: none;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -19,7 +9,6 @@ html {
     font-size: 62.5%; /* http://snook.ca/archives/html_and_css/font-size-with-rem */
     color: #111;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    overflow-y: scroll;
 
     /* sticky footer */
     position: relative;
@@ -30,19 +19,9 @@ body {
     /* Default font-size */
     font-size: 1.6rem;
 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1;
-    color: #585858;
-    background: #eee url('../images/background.png');
-    padding: 22px 10px;
-    padding-bottom: 55px;
-
     /* sticky footer - match footer height */
     margin-bottom: 60px;
 }
-
-::selection { background: #5f74a0; color: #fff; }
-::-moz-selection { background: #5f74a0; color: #fff; }
 
 section#main {
     max-width: 600px;
@@ -117,7 +96,7 @@ nav ul li a:link {
 }
 
 nav ul li a:hover {
-    color: #18bc9c; /* teal */
+    color: #18bc9c; /* teel */
 }
 
 /*----------------------------------------------------
@@ -129,7 +108,7 @@ a.active:link, a.active:visited, a.active:active, a.active:hover {
 }
 
 h1 {
-    text-align: left;
+    text-align: center;
     font-size: 3.0rem;
 }
 

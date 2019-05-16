@@ -1,32 +1,27 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ $book->title }}
+    {{ $student->title }}
 @endsection
 
 @section('head')
     {{-- Page specific CSS includes should be defined here; this .css file does not exist yet, but we can create it --}}
-    <link href='/css/books/show.css' rel='stylesheet'>
+    <link href='/css/students/show.css' rel='stylesheet'>
 @endsection
 
 @section('content')
-    <h1>{{ $book->title }}</h1>
+    <h1>{{ $student->last_name }}, {{ $student->first_name }}</h1>
 
     <div class='book cf'>
-        <img src='{{ $book->cover_url }}' class='cover' alt='Cover image for {{ $book->title }}'>
-        <p>By {{ $book->author->getFullName() }} ({{ $book->published_year }})</p>
-        <p>Added {{ $book->created_at->format('m/d/y') }}</p>
-
-        <p>
-            @foreach($book->tags as $tag)
-                <span class='tag'>{{ $tag->name }}</span>
-            @endforeach
-        </p>
+        <p><b>Student Name:</b> {{ $student->last_name }}, {{ $student->first_name }}</p>
+        <p><b>Grade:</b> {{ $student->grade }}, <b>Team:</b> {{ $student->team }}, <b>Category:</b> {{ $student->category }}</p>
+        <p><b>Fluency Level:</b> {{ $student->fluency_level }}, <b>Reading Level:</b> {{ $student->reading_level }}</p>
+        <p><b>Added on:</b> {{ $student->updated_at->format('m/d/y') }}</p>
+        <p><b>Last Updated on:</b> {{ $student->updated_at->format('m/d/y') }}</p>
 
         <ul class='bookActions'>
-            <li><a href='{{ $book->purchase_url }}'><i class="fas fa-shopping-cart"></i> Purchase</a>
-            <li><a href='/books/{{ $book->id }}/edit'><i class="fas fa-edit"></i> Edit</a>
-            <li><a href='/books/{{ $book->id }}/delete'><i class="fas fa-trash"></i> Delete</a>
+            <li><a href='/students/{{ $student->id }}/edit'><i class="fas fa-edit"></i> Edit</a>
+            <li><a href='/students/{{ $student->id }}/delete'><i class="fas fa-trash"></i> Delete</a>
         </ul>
     </div>
 @endsection

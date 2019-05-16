@@ -1,4 +1,5 @@
-/* box sizing: http://www.paulirish.com/2012/box-sizing-border-box-ftw */
+@import url('https://fonts.googleapis.com/css?family=Amarante');
+
 * {
     margin: 0;
     padding: 0;
@@ -14,9 +15,8 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 html {
-    font-size: 62.5%; /* http://snook.ca/archives/html_and_css/font-size-with-rem */
+    font-size: 62.5%;
     color: #111;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow-y: scroll;
@@ -25,17 +25,16 @@ html {
     position: relative;
     min-height: 100%;
 }
-
 body {
-    /* Default font-size */
-    font-size: 1.6rem;
-
+    background: #eee url('../images/background.png');
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
     line-height: 1;
     color: #585858;
-    background: #eee url('../images/background.png');
+    /*
     padding: 22px 10px;
     padding-bottom: 55px;
+    */
 
     /* sticky footer - match footer height */
     margin-bottom: 60px;
@@ -44,27 +43,106 @@ body {
 ::selection { background: #5f74a0; color: #fff; }
 ::-moz-selection { background: #5f74a0; color: #fff; }
 
-section#main {
-    max-width: 600px;
-    width: 100%;
-    margin: auto;
-    padding-bottom: 20px;
-    text-align: center;
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+
+ol, ul { list-style: none; }
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+strong, b { font-weight: bold; }
+
+/** grid line (optional) **/
+table, td, th {
+  border: 1px solid black;
 }
 
+table { border-collapse: collapse; border-spacing: 0; }
+
+/*----------------------------------------------------
+page structure
+-----------------------------------------------------*/
+/** section id='main' **/
+section#main {
+    display: block;
+    text-align: center;
+    min-width: 950px;
+    background: #fff;
+    margin: 0 auto;
+    padding: 10px 17px;
+    padding-bottom: 20px;
+    -webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.35);
+}
+
+/*----------------------------------------------------
+split the css
+-----------------------------------------------------*/
+
+/** table **/
+#keywords {
+    margin: 0 auto;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+#keywords thead {
+    cursor: pointer;
+    background: #c9dff0;
+}
+#keywords thead tr th {
+    font-weight: bold;
+    padding: 12px 30px;
+    padding-left: 42px;
+}
+#keywords thead tr th span {
+    padding-right: 20px;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+}
+
+/* future improvement
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+    background: #acc8dd;
+}
+
+#keywords thead tr th.headerSortUp span {
+    background-image: url('../images/background.png');
+}
+#keywords thead tr th.headerSortDown span {
+    background-image: url('../images/down.png');
+}
+*/
+#keywords tbody tr {
+    color: #555;
+}
+#keywords tbody tr td {
+    text-align: center;
+    padding: 10px 10px;
+}
+
+/** Buttons **/
+.btn {
+/*
+    background-color: white;
+    color: black;
+*/
+    margin-top: 5px;
+    font-size: 1.5rem;
+    /*border: 2px solid #e7e7e7;*/
+}
+
+.btn:hover {background-color: #e7e7e7;}
+
+/*----------------------------------------------------
+Header & Footer
+-----------------------------------------------------*/
 header {
     text-align: center;
     margin-top: 20px;
 }
 
-#logo {
-    /* Actual width is 632; displaying at half-size for retina screens */
-    width: 316px;
-}
-
 footer {
     text-align: center;
-    background-color: #eee;
+    background-color: #bebebe;
 
     /* sticky footer */
     position: absolute;
@@ -93,7 +171,8 @@ nav {
     border-bottom: 1px solid #eee;
     padding: 5px;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 nav ul {
@@ -129,8 +208,12 @@ a.active:link, a.active:visited, a.active:active, a.active:hover {
 }
 
 h1 {
-    text-align: left;
-    font-size: 3.0rem;
+    font-family: 'Amarante', Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 3.0em;
+    line-height: 1.7em;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 h2 {
@@ -144,6 +227,7 @@ h3 {
 /*----------------------------------------------------
 Forms
 -----------------------------------------------------*/
+/*
 label, legend {
     display: block;
     margin-top: 20px;
@@ -153,6 +237,16 @@ label, legend {
     letter-spacing: .75px;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+input, textarea {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
 }
 
 input[type=text], input[type=email], input[type=password], textarea, select {
@@ -181,12 +275,9 @@ ul.checkboxes label {
     font-weight: normal;
     margin: 0;
 }
+*/
 
-.btn {
-    margin-top: 20px;
-    font-size: 1.5rem;
-}
-
+/** errors **/
 .error {
     list-style-type: none;
     color: #a94442; /* reddish */
@@ -210,24 +301,4 @@ ul.checkboxes label {
 .details {
     font-size: 1.1rem;
     font-style: italic;
-}
-
-/*----------------------------------------------------
-Misc
------------------------------------------------------*/
-/* Clear Fix: http://nicolasgallagher.com/micro-clearfix-hack/ */
-.cf:before,
-.cf:after {
-    content: " ";
-    /* 1 */
-    display: table;
-    /* 2 */
-}
-
-.cf:after {
-    clear: both;
-}
-
-.cf {
-    *zoom: 1;
 }

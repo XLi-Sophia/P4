@@ -1,61 +1,56 @@
 @extends('layouts.master')
 
 @section('title')
-    Edit book: {{ $book->title }}
+    Edit Student Info
+@endsection
+
+@section('head')
+    <link href='/css/students/create.css' rel='stylesheet'>
 @endsection
 
 @section('content')
 
-    <h1>Edit book: {{ $book->title }}</h1>
+    <h1>Edit Student: {{$student->first_name}}, {{$student->last_name}}</h1>
 
-    <form method='POST' action='/books/{{ $book->id }}'>
+    <form method='POST' action='/students/{{ $student->id }}'>
 
         <div class='details'>* Required fields</div>
         {{ csrf_field() }}
         {{ method_field('put') }}
 
-        <label for='title'>* Title</label>
-        <input type='text' name='title' id='title' value='{{ old('title', $book->title) }}'>
-        @include('includes.error-field', ['fieldName' => 'title'])
+        <div>
+            <label for='first_name'>* First Name</label>
+            <input type='text' name='first_name' id='first_name' value='{{ old('first_name', $student->first_name) }}'>
+            @include('includes.error-field', ['fieldName' => 'first_name'])
 
-        <label for='author'>* Author</label>
-        <select name='author_id'>
-            <option value=''>Choose one...</option>
-            @foreach($authors as $author)
-                <option value='{{ $author->id }}' {{ (old('author_id', $book->author->id) == $author->id) ? 'selected' : '' }}>{{ $author->getFullName }}</option>
-            @endforeach
-        </select>
-        @include('includes.error-field', ['fieldName' => 'author_id'])
+            <label for='last_name'>* Last Name</label>
+            <input type='text' name='last_name' size='20' id='last_name' value='{{ old('last_name', $student->last_name) }}'>
+            @include('includes.error-field', ['fieldName' => 'last_name'])
 
-        <label for='published_year'>* Published Year (YYYY)</label>
-        <input type='text'
-               name='published_year'
-               id='published_year'
-               value='{{ old('published_year', $book->published_year) }}'>
-        @include('includes.error-field', ['fieldName' => 'published_year'])
+            <label for='grade'>* Grade</label>
+            <input type='number' min='1' max='8' step='1' name='grade' id='grade' size='20' value='{{ old('grade', $student->grade) }}'>
+            @include('includes.error-field', ['fieldName' => 'grade'])
 
-        <label for='cover_url'>* Cover URL</label>
-        <input type='text' name='cover_url' id='cover_url' value='{{ old('cover_url', $book->cover_url) }}'>
-        @include('includes.error-field', ['fieldName' => 'cover_url'])
+            <label for='category'>* Category</label>
+            <input type='text' name='category' id='category' size='3' value='{{ old('category', $student->category) }}'>
+            @include('includes.error-field', ['fieldName' => 'category'])
 
-        <label for='purchase_url'>* Purchase URL </label>
-        <input type='text' name='purchase_url' id='purchase_url' value='{{ old('purchase_url', $book->purchase_url) }}'>
-        @include('includes.error-field', ['fieldName' => 'purchase_url'])
+            <label for='team'>* Team</label>
+            <input type='text' name='team' id='team' size='20' value='{{ old('team', $student->team) }}'>
+            @include('includes.error-field', ['fieldName' => 'team'])
 
-        <label>Tags</label>
-        @foreach($tags as $tag)
-            <ul class='checkboxes'>
-                <li>
-                    <label>
-                        <input {{ (in_array($tag->id, $bookTags)) ? 'checked' : '' }} type='checkbox'
-                               name='tags[]'
-                               value='{{ $tag->id }}'> {{ $tag->name }}
-                    </label>
-                </li>
-            </ul>
-        @endforeach
+            <label for='fluency_level'>* Fluency Level</label>
+            <input type='number' min='0' max='399' step='1' name='fluency_level' id='fluency_level' value='{{ old('fluency_level', $student->fluency_level) }}'>
+            @include('includes.error-field', ['fieldName' => 'fluency_level'])
 
-        <input type='submit' class='btn btn-primary' value='Save changes'>
+            <label for='reading_level'>* Reading Level</label>
+            <input type='number' min='0' max='2.5' step='0.1' name='reading_level' id='reading_level' value='{{ old('reading_level', $student->reading_level) }}'>
+            @include('includes.error-field', ['fieldName' => 'reading_level'])
+        </div>
+
+        <div>
+            <input type='submit' class='btn btn-primary' value='Save Change'>
+        </div>
     </form>
 
     @if(count($errors) > 0)

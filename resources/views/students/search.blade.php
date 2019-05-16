@@ -15,7 +15,7 @@
     <form method='GET' action='/students/search-process'>
 
         <fieldset>
-            <label for='searchTerm'>Search by title:</label>
+            <label for='searchTerm'>Search by last name:</label>
             <input type='text' name='searchTerm' id='searchTerm' value='{{ $searchTerm }}'>
             @include('includes.error-field', ['fieldName' => 'searchTerm'])
 
@@ -29,7 +29,7 @@
     @if($searchTerm)
         <div id='results'>
             <h2>
-                {{ count($searchResults) }} {{ str_plural('Result', count($searchResults)) }} for
+                {{ count($searchResults) }} Result found with last name:
                 <em>“{{ $searchTerm }}”</em>
             </h2>
 
@@ -37,9 +37,21 @@
                 No matches found.
             @else
                 <ul>
-                    @foreach($searchResults as $book)
-                        <li><a href='/students/{{$book->id}}'>{{ $book->title }} by {{ $book->author->getFullname() }}</a>
+                    @foreach($searchResults as $student)
+                        <li>{{ $student->first_name }} {{ $student->last_name }}, grade ({{ $student->grade }}): has reading level of {{ $student->reading_level }}<a href='/students/{{$student->id}}'> Student Info</a>
                         </li>
+                    <!--
+                        <li><a href='/students/{{$student->id}}/edit'>{{ $student->last_name }} has reading level of {{ $student->reading_level }}</a>
+                        </li>
+                    -->
+
+                        <!--
+                        <ul class='bookActions'>
+                            <li><a href='{{ $student->purchase_url }}'><i class="fas fa-shopping-cart"></i> Purchase</a>
+                            <li><a href='/books/{{ $student->id }}/edit'><i class="fas fa-edit"></i> Edit</a>
+                            <li><a href='/books/{{ $student->id }}/delete'><i class="fas fa-trash"></i> Delete</a>
+                        </ul>
+                        -->
                     @endforeach
                 </ul>
             @endif

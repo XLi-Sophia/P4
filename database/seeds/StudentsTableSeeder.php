@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Student;
+use App\Grade;
 
 class StudentsTableSeeder extends Seeder
 {
@@ -26,11 +27,18 @@ class StudentsTableSeeder extends Seeder
 
         foreach ($students as $key => $studentData) {
             $student = new Student();
+            /*
+            $name = explode(' ', $studentData[1]);
+            $lastName = array_pop($name);
 
+            # Find that grade in the students table
+            $grade_id = Grade::where('last_name', '=', $lastName)->pluck('id')->first();
+            */
             $student->created_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
             $student->updated_at = Carbon\Carbon::now()->subDays($count)->toDateTimeString();
             $student->first_name = $studentData[0];
             $student->last_name = $studentData[1];
+            /*$student->grade_id = $grade_id;*/
             $student->grade = $studentData[2];
             $student->reading_level = $studentData[3];
             $student->Fluency_level = $studentData[4];

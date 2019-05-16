@@ -13,7 +13,7 @@
           rel="stylesheet"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
-    <link href='/css/p4.css' rel='stylesheet'>
+    <link rel='stylesheet' href='/css/student.css'>
 
     {{-- Page specific CSS can be injected here via the `head` section --}}
     @yield('head')
@@ -25,7 +25,7 @@
 @endif
 
 <header>
-    <a href='/'><img src='/images/logo.jpg' id='logo' alt='App Logo'></a>
+    <h1>Student Progress Tracker</h1>
     <nav>
         <ul>
             @foreach(config('app.nav') as $link => $label)
